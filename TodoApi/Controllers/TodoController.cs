@@ -30,6 +30,7 @@ namespace TodoAPI.Controllers
 
 
         [HttpGet("myTodos")]
+        [Authorize(Scopes.TodoReadAll)]
         public IEnumerable<Todo> GetMyTodos()
         {
             var userId = GetUserId();
@@ -37,6 +38,7 @@ namespace TodoAPI.Controllers
         }
 
         [HttpPost("add")]
+        [Authorize(Scopes.TodoAdd)]
         public Todo AddTodo(string title)
         {
             var userId = GetUserId();
@@ -44,6 +46,7 @@ namespace TodoAPI.Controllers
         }
 
         [HttpGet("read/{todoId}")]
+        [Authorize(Scopes.TodoRead)]
         public ActionResult<Todo> GetTodo(Guid todoId)
         {
             var userId = GetUserId();
@@ -51,15 +54,18 @@ namespace TodoAPI.Controllers
         }
 
         [HttpGet("all")]
+        [Authorize(Roles = AppRoles.TodoReadAll)]
         public ActionResult<IEnumerable<Todo>> GetAllTodos()
         {
-            throw new NotImplementedException();
+            return Ok(todoRepository.GetAllTodos());
         }
 
         [HttpDelete("delete")]
+        [Authorize(Roles = AppRoles.TodoDeleteAll)]
         public ActionResult DeleteTodos([FromBody] IEnumerable<Guid> todoIds)
         {
-            throw new NotImplementedException();
+            todoRepository.DeleteTodos(todoIds);
+            return Ok();
         }
     }
 }

@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.AzureAD.UI;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TodoApi.Authorization;
 using TodoAPI.Repositories;
 
 namespace TodoApi
@@ -37,6 +39,18 @@ namespace TodoApi
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSingleton<ITodoRepository, TodoMemoryRepository>();
+            services.AddTransient<IClaimsTransformation, ScopeSplitClaimsTransformation>();
+            services.AddTransient<IAuthorizationHandler, ValidScopeRequirementHandler>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(Scopes.TodoReadAll,
+                    builder => builder.Requirements.Add(new ValidScopeRequirement(Scopes.TodoReadAll)));
+                options.AddPolicy(Scopes.TodoRead,
+                    builder => builder.Requirements.Add(new ValidScopeRequirement(Scopes.TodoRead)));
+                options.AddPolicy(Scopes.TodoAdd,
+                    builder => builder.Requirements.Add(new ValidScopeRequirement(Scopes.TodoAdd)));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
