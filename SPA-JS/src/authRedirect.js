@@ -16,3 +16,25 @@ function signIn(){
         scopes : ["openid", "email", "profile"]
     })
 }
+
+function getAccessToken(requestParams, callApi){
+    userAgentApplication.acquireTokenSilent(requestParams)
+        .then(function (accessTokenResponse) {
+            const accessToken = accessTokenResponse.accessToken;
+            callApi(accessToken);
+        })
+        .catch(function (error) {
+            console.log(error);
+            userAgentApplication.acquireTokenRedirect(requestParams);
+        })
+}
+
+const apiScopes = [
+    "api://4dbf2a2e-197e-4e51-8cb2-2fcd27554aa3/Todo.Add",
+    "api://4dbf2a2e-197e-4e51-8cb2-2fcd27554aa3/Todo.Read",
+    "api://4dbf2a2e-197e-4e51-8cb2-2fcd27554aa3/Todo.ReadAll"
+];
+
+getAccessToken({
+    scopes : apiScopes
+}, console.log);
