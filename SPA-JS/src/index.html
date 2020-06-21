@@ -55,6 +55,22 @@
 
   <div id="authentifcatedUserArea" class="container" style="display: none;">
     Bienvenue au Todo-App
+    <div class="row">
+      <div class="col-md-5 offset-md-3 d-flex flex-column ">
+        <p class="text-center h1 mb-3">Todo-App</p>
+        <form class="form-inline justify-content-center">
+          <div class="form-group mr-3">
+            <input type="text" class="form-control" id="todoTitle" placeholder="Enter todo title">
+          </div>
+          <button type="submit" class="btn btn-primary" onclick="AddTodo(); return false;">Add</button>
+        </form>
+        <p class="h4 mt-3">My todos : </p>
+        <ul id="todoList">
+          <li>Task one</li>
+          <li>Task two</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <br>

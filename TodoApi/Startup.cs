@@ -24,6 +24,15 @@ namespace TodoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowMyOrigins", builder => builder
+                .WithOrigins("https://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod());
+            });
+
             services.AddAuthentication(AzureADDefaults.JwtBearerAuthenticationScheme)
                 .AddAzureADBearer(options => Configuration.Bind("AzureAd", options));
 
@@ -65,6 +74,8 @@ namespace TodoApi
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseCors("AllowMyOrigins");
+
             app.UseAuthentication();
 
             app.UseHttpsRedirection();
