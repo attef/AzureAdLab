@@ -11,4 +11,9 @@ const maslConfig = {
 
 var userAgentApplication = new Msal.UserAgentApplication(maslConfig);
 
-
+var connectedUser = userAgentApplication.getAccount();
+if(connectedUser){
+    UI.onAuthenticatedUser(connectedUser.idToken.name);
+}else{
+    UI.onUnauthenticatedUser();
+}
