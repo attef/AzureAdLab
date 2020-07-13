@@ -28,7 +28,7 @@ namespace TodoApi
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowMyOrigins", builder => builder
-                .WithOrigins("https://localhost:3000")
+                .WithOrigins("http://localhost:3000")
                 .AllowAnyHeader()
                 .AllowAnyMethod());
             });
