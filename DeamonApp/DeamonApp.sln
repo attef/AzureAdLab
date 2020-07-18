@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30120.98
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeamonApp", "DeamonApp\DeamonApp.csproj", "{7AF797C3-B210-42C4-9AF4-A321759480D9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7AF797C3-B210-42C4-9AF4-A321759480D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AF797C3-B210-42C4-9AF4-A321759480D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AF797C3-B210-42C4-9AF4-A321759480D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AF797C3-B210-42C4-9AF4-A321759480D9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C23CA1CA-A6D6-4B77-9904-74BE0EDF113F}
+	EndGlobalSection
+EndGlobal
